@@ -27,8 +27,6 @@ export default function ensuresAuthenticated(request: Request, response: Respons
       id: sub,
     }
 
-    console.log(decoded);
-
     return next();
 
   } catch {
