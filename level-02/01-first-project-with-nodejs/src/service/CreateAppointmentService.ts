@@ -5,6 +5,7 @@ import Appointment from '../models/Appointment';
 import AppointmentsRepository from '../repositories/AppointmentsRepository';
 import appointmentsRouter from '../routes/appointments.routes';
 
+import AppError from '../errors/AppError';
 interface Request {
   provider_id: string;
   date: Date;
@@ -20,7 +21,7 @@ class CreateAppointmentService{
     const findAppointmentInSameDate = await appointmentsRepository.findByDate(appointmentDate);
 
     if(findAppointmentInSameDate){
-      throw Error('This appointment is already booked');
+      throw new AppError('This appointment is already booked');
     }
 
     const appointment = appointmentsRepository.create({
